@@ -1,87 +1,86 @@
 # Randomizer
 
-A sleek macOS menu bar randomizer app with CS:GO-style carousel animations and Liquid Glass effects.
+Маленькое macOS-приложение, которое живёт в menu bar и помогает принимать решения. Три режима на выбор: случайное число, выбор из вариантов или простое «Да / Нет». Результат выпадает через анимированную карусель в стиле открытия кейсов из CS:GO — быстро крутится, плавно тормозит, останавливается на ответе.
 
-Lives in your menu bar, always one click away. Pick a mode, spin the wheel, get your result.
+Всё работает из menu bar — иконка кубика в трее, клик, попап, результат. Без лишних окон, без Dock-иконки.
 
 <p align="center">
-  <img src="screenshots/01-mode-select.png" width="260" alt="Mode Selection">
-  <img src="screenshots/03-numbers-config.png" width="260" alt="Numbers Mode">
-  <img src="screenshots/02-options-config.png" width="260" alt="Options Mode">
+  <img src="screenshots/01-mode-select.png" width="260" alt="Выбор режима">
+  <img src="screenshots/03-numbers-config.png" width="260" alt="Режим чисел">
+  <img src="screenshots/02-options-config.png" width="260" alt="Режим вариантов">
 </p>
 
 <p align="center">
-  <img src="screenshots/04-spinner.png" width="260" alt="Carousel Spinning">
-  <img src="screenshots/05-results.png" width="260" alt="Results with Stats">
+  <img src="screenshots/04-spinner.png" width="260" alt="Карусель крутится">
+  <img src="screenshots/05-results.png" width="260" alt="Результат со статистикой">
 </p>
 
-## Features
+## Что умеет
 
-- **Numbers** --- random number in a range (min/max)
-- **Options** --- random pick from a custom list of variants
-- **Yes / No** --- simple coin-flip answer
-- **Multi-spin** (1 / 3 / 5) --- run sequential carousels and pick the most frequent result
-- **CS:GO-style carousel** animation with smooth ease-out deceleration
-- **Liquid Glass** UI effects (macOS 26 Tahoe)
-- **Translucent popover** --- see your desktop through the app
-- Runs entirely in the menu bar --- no Dock icon
+- **Числа** — случайное число в заданном диапазоне (мин / макс)
+- **Варианты** — случайный выбор из своего списка (добавляешь сколько нужно через «+»)
+- **Да / Нет** — подбросить монетку
+- **Мульти-спин** — можно крутить 1, 3 или 5 раз подряд. Приложение покажет статистику и выберет самый частый результат
+- Карусель с плавным торможением (~3.5 сек), победитель подсвечивается
+- Полупрозрачный попап — виден рабочий стол под окном
+- Liquid Glass эффекты (macOS 26)
 
-## Requirements
+## Требования
 
-- **macOS 26 (Tahoe)** or later
-- **Swift 6.2** / Xcode 26+
+- macOS 26 (Tahoe) или новее
+- Swift 6.2 / Xcode 26+ (для сборки из исходников)
 
-## Installation
+## Установка
 
-### Download DMG
+### Скачать готовое
 
-Download the latest `.dmg` from [Releases](../../releases), open it, and drag **Randomizer** to Applications.
+Скачай `.dmg` из [Releases](../../releases), открой, перетащи **Randomizer** в Applications. Готово.
 
-### Build from Source
+### Собрать из исходников
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/Randomizer.git
+git clone https://github.com/hyattmatthew/Randomizer.git
 cd Randomizer
 swift build -c release
 ```
 
-The built binary will be at `.build/release/Randomizer`. Run it directly or wrap it into an `.app` bundle (see below).
+Бинарник будет в `.build/release/Randomizer` — можно запускать напрямую.
 
-### Run in Development
+Для разработки:
 
 ```bash
 swift run
 ```
 
-## How It Works
+## Как пользоваться
 
-1. Click the dice icon in the menu bar
-2. Choose a mode: **Numbers**, **Options**, or **Yes/No**
-3. Configure settings (range, variants, spin count)
-4. Hit **Spin!** and watch the carousel
-5. See your result with stats breakdown (for multi-spin)
+1. Кликни на кубик в menu bar
+2. Выбери режим: Числа, Варианты или Да/Нет
+3. Настрой параметры (диапазон, варианты, сколько раз крутить)
+4. Жми «Крутить!» — смотри как карусель замедляется
+5. Получи результат (а при мульти-спине — ещё и статистику по всем попыткам)
 
-## Tech Stack
+## Стек
 
-- **Swift** + **SwiftUI** (native macOS)
-- **NSStatusItem** + **NSPopover** for menu bar integration
-- **Liquid Glass** (.glassEffect API) for modern translucent UI
-- **Swift Package Manager** for build & dependencies
-- Custom carousel animation with `timingCurve` easing
+- Swift + SwiftUI, нативное macOS-приложение
+- NSStatusItem + NSPopover для жизни в menu bar
+- `.glassEffect()` для Liquid Glass UI
+- Swift Package Manager
+- Кастомная анимация карусели через `timingCurve`
 
-## Project Structure
+## Структура
 
 ```
 Sources/Randomizer/
-  main.swift              # Entry point (agent app, no Dock icon)
-  AppDelegate.swift       # NSStatusItem + NSPopover setup
-  ContentView.swift       # Root navigation, state, brand colors
-  ModeSelectScreen.swift  # Mode selection cards
-  ModeConfigScreen.swift  # Mode settings + spin count picker
-  SpinnerScreen.swift     # Carousel animation + results
-  Resources/              # App icons (PNG)
+├── main.swift              — точка входа, agent app (без Dock-иконки)
+├── AppDelegate.swift       — иконка в трее + попап
+├── ContentView.swift       — навигация, состояние, цвета
+├── ModeSelectScreen.swift  — экран выбора режима
+├── ModeConfigScreen.swift  — настройки + выбор количества спинов
+├── SpinnerScreen.swift     — карусель + результаты
+└── Resources/              — иконки (PNG)
 ```
 
-## License
+## Лицензия
 
-MIT --- see [LICENSE](LICENSE) for details.
+MIT — подробности в [LICENSE](LICENSE).
