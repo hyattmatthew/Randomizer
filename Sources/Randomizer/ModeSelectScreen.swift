@@ -18,8 +18,8 @@ struct ModeSelectScreen: View {
                         .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
                 }
 
-                Text("Randomizer")
-                    .font(.system(size: 22, weight: .bold, design: .rounded))
+                Text("Рандом Рандомыч")
+                    .font(.system(size: 20, weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
 
                 Text("Выбери режим")
